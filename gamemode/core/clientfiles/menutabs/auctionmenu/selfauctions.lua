@@ -2,9 +2,9 @@ local intDefaultAuctionTime = 24 --1 Day
 local intCleanUpTime = 168 --1 Week
 PANEL = {}
 function PANEL:Init()
-  
+
   self.PlayerAuctionsList = CreateGenericList(self, 3, false, true)
-  
+
   self:LoadPlayerAuctions()
 end
 
@@ -23,7 +23,7 @@ function PANEL:LoadPlayerAuctions()
         ltmAuction:SetItemIcon(tblInfo.Item, tblInfo.Amount, 30)
         ltmAuction:SetNameText(ItemTable(tblInfo.Item).PrintName)
         ltmAuction:SetDescText("$" .. tblInfo.Price .. "   " .. math.Round(tblInfo.TimeLeft - (intCleanUpTime - intDefaultAuctionTime)) .. " Hours Left")
-        ltmAuction:AddButton("gui/silkicons/check_off", "Cancel Auction", function()   RunConsoleCommand("UD_CancelAuction", intKey)end)
+        ltmAuction:AddButton("icon16/check_off.png", "Cancel Auction", function()   RunConsoleCommand("UD_CancelAuction", intKey)end)
         self.PlayerAuctionsList:AddItem(ltmAuction)
       end
     end

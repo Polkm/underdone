@@ -311,7 +311,7 @@ if CLIENT then
 
   function CreateGenericImageButton(pnlParent, strImage, strToolTip, fncFunction)
     local btnNewButton = vgui.Create("DImageButton", pnlParent)
-    btnNewButton:SetMaterial(strImage)
+    btnNewButton:SetImage(strImage)
     btnNewButton:SetToolTip(strToolTip)
     btnNewButton:SizeToContents()
     btnNewButton.DoClick = fncFunction
@@ -347,9 +347,21 @@ if CLIENT then
   end
 
   function CreateGenericMultiChoice(pnlParent, strText, boolEditable)
-    local mlcNewMultiChoice = vgui.Create("DMultiChoice", pnlParent)
+    local mlcNewMultiChoice = vgui.Create("DComboBox", pnlParent)
     mlcNewMultiChoice:SetText(strText or "")
-    mlcNewMultiChoice:SetEditable(boolEditable or false)
+    mlcNewMultiChoice:SetDisabled(not (boolEditable or false))
     return mlcNewMultiChoice
+  end
+
+  function CreateGenericCollapse(pnlParent, strName, intSpacing, boolHorz)
+    local cpcNewCollapseCat = vgui.Create("DCollapsibleCategory", pnlParent)
+    cpcNewCollapseCat:SetLabel(strName)
+    cpcNewCollapseCat.List = vgui.Create("DPanelList")
+    cpcNewCollapseCat.List:SetAutoSize(true)
+    cpcNewCollapseCat.List:SetSpacing(intSpacing)
+    cpcNewCollapseCat.List:SetPadding(intSpacing)
+    cpcNewCollapseCat.List:EnableHorizontal(boolHorz)
+    cpcNewCollapseCat:SetContents(cpcNewCollapseCat.List)
+    return cpcNewCollapseCat
   end
 end

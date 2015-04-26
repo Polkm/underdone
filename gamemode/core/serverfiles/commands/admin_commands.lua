@@ -49,7 +49,7 @@ function GM:AdminBackup()
   for _, ply in pairs(player.GetAll()) do
     local strSteamID = string.Replace(ply:SteamID(), ":", "!")
     if strSteamID ~= "STEAM_ID_PENDING" then
-      local strFileName = "UnderDone/" .. strSteamID .. ".txt"
+      local strFileName = "underdone/" .. strSteamID .. ".txt"
       local tblSaveTable = table.Copy(ply.Data)
       tblSaveTable.Inventory = {}
       --Polkm: Space saver loop

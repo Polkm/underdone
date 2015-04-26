@@ -30,9 +30,9 @@ function GM.PapperDollEditor.OpenPapperDollEditor()
     tblPaintPanel:SetBoarder(2, clrDrakGray)
     jdraw.DrawPanel(tblPaintPanel)
   end
-  local mlcSlotSellector = vgui.Create("DMultiChoice")
+  local mlcSlotSellector = vgui.Create("DComboBox")
   pnlControlsList:AddItem(mlcSlotSellector)
-  local mlcObjectSellector = vgui.Create("DMultiChoice")
+  local mlcObjectSellector = vgui.Create("DComboBox")
   pnlControlsList:AddItem(mlcObjectSellector)
   local cpcVectorControls = GAMEMODE.PapperDollEditor.AddVectorControls(pnlControlsList)
   local cpcAngleControls = GAMEMODE.PapperDollEditor.AddAngleControls(pnlControlsList)
@@ -46,7 +46,7 @@ function GM.PapperDollEditor.OpenPapperDollEditor()
     tblPaintPanel:SetBoarder(2, clrTan)
     jdraw.DrawPanel(tblPaintPanel)
   end
-  
+
   frmPapperDollFrame:SetPos(50, 50)
   frmPapperDollFrame:SetSize(325, 450)
   frmPapperDollFrame:SetTitle("Papper Doll Editor")
@@ -59,16 +59,16 @@ function GM.PapperDollEditor.OpenPapperDollEditor()
     GAMEMODE.PapperDollEditor.CurrentCamRotation = nil
     GAMEMODE.PapperDollEditor.CurrentCamDistance = nil
   end
-  
+
   pnlControlsList:SetPos(5, 30)
   pnlControlsList:SetSize(frmPapperDollFrame:GetWide() - 10, frmPapperDollFrame:GetTall() - 35)
   pnlControlsList:EnableHorizontal(false)
   pnlControlsList:EnableVerticalScrollbar(true)
   pnlControlsList:SetSpacing(5)
   pnlControlsList:SetPadding(5)
-  
+
   mlcSlotSellector:SetText("Pick the slot")
-  mlcSlotSellector:SetEditable(false)
+  mlcSlotSellector:SetDisabled(false)
   for name, slot in pairs(GAMEMODE.DataBase.Slots) do
     mlcSlotSellector:AddChoice(name)
   end
@@ -83,7 +83,7 @@ function GM.PapperDollEditor.OpenPapperDollEditor()
       end
     end
   end
-  mlcObjectSellector:SetEditable(false)
+  mlcObjectSellector:SetDisabled(false)
   mlcObjectSellector.OnSelect = function(index, value, data)
     data = tonumber(data)
     GAMEMODE.PapperDollEditor.CurrentObject = data

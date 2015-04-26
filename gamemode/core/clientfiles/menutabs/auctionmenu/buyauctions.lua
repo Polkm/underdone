@@ -3,7 +3,7 @@ local intCleanUpTime = 168 --1 Week
 PANEL = {}
 function PANEL:Init()
   self.AuctionsList = CreateGenericList(self, 3, false, true)
-  
+
   self.CreateAuction = CreateGenericPanel(self)
   self.ItemSellector = CreateGenericMultiChoice(self.CreateAuction)
   for strItem, intAmount in pairs(LocalPlayer().Data.Inventory or {}) do
@@ -32,7 +32,7 @@ function PANEL:Init()
       self.AmountEntry:SetMax(LocalPlayer().Data.Inventory[strItem])
     end)
   end)
-  
+
   self.PagesPanel = CreateGenericPanel(self)
   self.PageRight = vgui.Create("DSysButton", self.PagesPanel)
   self.PageLeft = vgui.Create("DSysButton", self.PagesPanel)
@@ -47,13 +47,13 @@ function PANEL:Init()
     RunConsoleCommand("UD_SetAuctionPage", math.Clamp(LocalPlayer():GetNWInt("AuctionPage") + 1, 0, 100))
   end
   self.PageLabel = CreateGenericLabel(self.PagesPanel, "Default", "Page " .. (LocalPlayer():GetNWInt("AuctionPage") + 1), clrDrakGray)
-  
+
   self:LoadAuctions()
 end
 
 function PANEL:PerformLayout()
   self.AuctionsList:SetSize(self:GetWide(), self:GetTall() - 35)
-  
+
   self.CreateAuction:SetSize(self:GetWide() - 150, 30)
   self.CreateAuction:SetPos(0, self.AuctionsList:GetTall() + 5)
   self.ItemSellector:SetSize(150, 20)
@@ -64,7 +64,7 @@ function PANEL:PerformLayout()
   self.PriceEntry:SetPos(5 + self.ItemSellector:GetWide() + 5 + self.AmountEntry:GetWide() + 5, 5)
   self.CreateAuctionButton:SetSize(16, 16)
   self.CreateAuctionButton:SetPos(self.CreateAuction:GetWide() - 16 - 5, (self.CreateAuction:GetTall() / 2) - (self.CreateAuctionButton:GetTall() / 2))
-  
+
   self.PagesPanel:SetSize(self.AuctionsList:GetWide() - self.CreateAuction:GetWide() - 5, 30)
   self.PagesPanel:SetPos(self.CreateAuction:GetWide() + 5, self.AuctionsList:GetTall() + 5)
   self.PageLeft:SetSize(20, 20)
@@ -88,7 +88,7 @@ function PANEL:LoadAuctions()
         ltmAuction:SetNameText(ItemTable(tblInfo.Item).PrintName)
         ltmAuction:SetDescText("$" .. tblInfo.Price .. "   " .. math.Round(tblInfo.TimeLeft - (intCleanUpTime - intDefaultAuctionTime)) .. " Hours Left")
         if tblInfo.SellerID == LocalPlayer():SteamID() or game.SinglePlayer() then
-          ltmAuction:AddButton("gui/silkicons/check_off", "Cancel Auction", function() RunConsoleCommand("UD_CancelAuction", intKey) end)
+          ltmAuction:AddButton("icon16/check_off.png", "Cancel Auction", function() RunConsoleCommand("UD_CancelAuction", intKey) end)
         end
         if tblInfo.SellerID ~= LocalPlayer():SteamID() or game.SinglePlayer() then
           ltmAuction:AddButton("gui/money", "Buy out Auction", function() RunConsoleCommand("UD_BuyOutAuction", intKey) end)
@@ -100,6 +100,3 @@ function PANEL:LoadAuctions()
   end
 end
 vgui.Register("buyauctionstab", PANEL, "Panel")
-
-
-

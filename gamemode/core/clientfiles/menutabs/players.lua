@@ -17,9 +17,9 @@ function PANEL:LoadPlayers()
   if self.ServerPlayerList.ContentList then self.ServerPlayerList.ContentList:Clear() end
   self.ServerPlayerList:SetDescText(#player.GetAll() .. " Player(s)")
   if #(LocalPlayer().Squad or {}) > 1 and not self.SquadPlayerList then
-    self.SquadPlayerList = CreateGenericListItem(20, "Your Squad", "", "gui/silkicons/group", clrTan, true, true)
+    self.SquadPlayerList = CreateGenericListItem(20, "Your Squad", "", "icon16/group.png", clrTan, true, true)
     if LocalPlayer():GetNWEntity("SquadLeader") ~= LocalPlayer() then
-      self.SquadPlayerList:AddButton("gui/silkicons/check_off", "Leave Squad", function() RunConsoleCommand("UD_LeaveSquad") end)
+      self.SquadPlayerList:AddButton("icon16/check_off.png", "Leave Squad", function() RunConsoleCommand("UD_LeaveSquad") end)
     end
     self.MainList:AddItem(self.SquadPlayerList)
   elseif #(LocalPlayer().Squad or {}) <= 1 and self.SquadPlayerList then
@@ -124,7 +124,7 @@ function PANEL:AddPlayer(pnlParent, plyPlayer)
   local btnActionsButton = ltiListItem:AddButton("gui/options", "Actions", fncOpenMenu)
   if pnlParent == self.SquadPlayerList then
     if LocalPlayer():GetNWEntity("SquadLeader") == LocalPlayer() and LocalPlayer():IsInSquad(plyPlayer) and LocalPlayer() ~= plyPlayer then
-      ltiListItem:AddButton("gui/silkicons/check_off", "Kick from Squad", fncSquadKick)
+      ltiListItem:AddButton("icon16/check_off.png", "Kick from Squad", fncSquadKick)
     end
   end
   ltiListItem.DoRightClick = fncOpenMenu

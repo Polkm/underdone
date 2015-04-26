@@ -1,5 +1,19 @@
 local Player = FindMetaTable("Player")
 
+concommand.Add("udk_edit_items_giveitem", function(ply, command, args)
+	local tblItemTable = ItemTable(args[1])
+	if tblItemTable.Use then
+		tblItemTable:Use(ply, tblItemTable)
+	end
+end)
+
+concommand.Add("udk_edit_items_clearpaperdoll", function(ply, command, args)
+	for strSlot, strItem in pairs(ply.Data.Paperdoll or {}) do
+		local tblItemTable = ItemTable(strItem)
+		if tblItemTable.Use then tblItemTable:Use(ply, tblItemTable) end
+	end
+end)
+
 function Player:HasSet(strSet)
   if not IsValid(self) then return false end
   local tblSetTable = EquipmentSetTable(strSet)

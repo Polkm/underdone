@@ -94,7 +94,7 @@ end
 
 if SERVER then
   function GM:LoadMapObjects()
-    local strFileName = "UnderDone/Maps/" .. game.GetMap() .. ".txt"
+    local strFileName = "underdone/Maps/" .. game.GetMap() .. ".txt"
     if not file.Exists(strFileName, "DATA") then return end
     local tblDecodedTable = util.JSONToTable(file.Read(strFileName))
     for _, SpawnPoint in pairs(tblDecodedTable.NPCSpawnPoints or {}) do
@@ -106,7 +106,7 @@ if SERVER then
   end
   hook.Add("Initialize", "LoadMapObjects", function() GAMEMODE:LoadMapObjects() end)
   function GM:SaveMapObjects()
-    local strFileName = "UnderDone/Maps/" .. game.GetMap() .. ".txt"
+    local strFileName = "underdone/Maps/" .. game.GetMap() .. ".txt"
     local tblSaveTable = table.Copy(GAMEMODE.MapEntities)
     for _, SpawnPoint in pairs(tblSaveTable.NPCSpawnPoints or {}) do
       SpawnPoint.Monster = nil

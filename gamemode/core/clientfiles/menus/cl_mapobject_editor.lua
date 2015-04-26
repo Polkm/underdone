@@ -42,15 +42,15 @@ function GM.MapEditor.OpenMapEditor()
     frmMapEditorFrame:Close()
     GAMEMODE.MapEditor.Open = false
   end
-  
+
   local pnlControlsList = CreateGenericList(frmMapEditorFrame, 5, false, true)
   pnlControlsList:SetPos(5, 55)
   pnlControlsList:SetSize(frmMapEditorFrame:GetWide() - 10, frmMapEditorFrame:GetTall() - 60)
-  
-  local mchObjectSetList = vgui.Create("DMultiChoice", frmMapEditorFrame)
+
+  local mchObjectSetList = vgui.Create("DComboBox", frmMapEditorFrame)
   local wngObjects = vgui.Create("DNumberWang", frmMapEditorFrame)
   GAMEMODE.MapEditor.ObjectsList = wngObjects
-  
+
   mchObjectSetList:SetPos(75, 30)
   mchObjectSetList:SetSize(frmMapEditorFrame:GetWide() - 135, 20)
   for key, sets in pairs(GAMEMODE.MapEditor.ObjectSets) do mchObjectSetList:AddChoice(key) end
@@ -60,7 +60,7 @@ function GM.MapEditor.OpenMapEditor()
     GAMEMODE.MapEditor.UpatePanel()
     pnlControlsList:Clear()
   end
-  
+
   wngObjects:SetPos(frmMapEditorFrame:GetWide() - 55, 30)
   wngObjects:SetSize(50, 20)
   wngObjects:SetDecimals(0)
@@ -81,12 +81,12 @@ function GM.MapEditor.OpenMapEditor()
       LocalPlayer():SetEyeAngles((GAMEMODE.MapEditor.CurrentObjectSet[tonumber(intIndex)].Postion - LocalPlayer():GetShootPos()):Angle())
     end
   end
-  
+
   local function SaveMap() RunConsoleCommand("UD_Dev_EditMap_SaveMap") end
   local btnSaveButton = CreateGenericImageButton(frmMapEditorFrame, "vgui/spawnmenu/save", "Save Map", SaveMap)
   btnSaveButton:SetPos(7, 32)
   btnSaveButton:SetSize(16, 16)
-  
+
   local function AddObject()
     GAMEMODE.MapEditor.CurrentObjectNum = #GAMEMODE.MapEditor.CurrentObjectSet + 1
     if GAMEMODE.MapEditor.CurrentObjectSet == GAMEMODE.MapEntities.NPCSpawnPoints then
@@ -95,10 +95,10 @@ function GM.MapEditor.OpenMapEditor()
       RunConsoleCommand("UD_Dev_EditMap_CreateWorldProp")
     end
   end
-  local btnNewSpawnButton = CreateGenericImageButton(frmMapEditorFrame, "gui/silkicons/brick_add", "New Object", AddObject)
+  local btnNewSpawnButton = CreateGenericImageButton(frmMapEditorFrame, "icon16/brick_add.png", "New Object", AddObject)
   btnNewSpawnButton:SetPos(32, 32)
   btnNewSpawnButton:SetSize(16, 16)
-  
+
   local function RemoveObject()
     pnlControlsList:Clear()
     if GAMEMODE.MapEditor.CurrentObjectSet == GAMEMODE.MapEntities.NPCSpawnPoints then
@@ -107,10 +107,10 @@ function GM.MapEditor.OpenMapEditor()
       RunConsoleCommand("UD_Dev_EditMap_RemoveWorldProp", GAMEMODE.MapEditor.CurrentObjectNum)
     end
   end
-  local btnRemoveButton = CreateGenericImageButton(frmMapEditorFrame, "gui/silkicons/check_off", "Remove Object", RemoveObject)
+  local btnRemoveButton = CreateGenericImageButton(frmMapEditorFrame, "icon16/check_off.png", "Remove Object", RemoveObject)
   btnRemoveButton:SetPos(57, 32)
   btnRemoveButton:SetSize(16, 16)
-  
+
   GAMEMODE.MapEditor.Open = true
 end
 concommand.Add("UD_Dev_EditMap", function() GAMEMODE.MapEditor.OpenMapEditor() end)
@@ -133,8 +133,8 @@ function GM.MapEditor.AddSpawnPointControls(pnlAddList)
   local intLevel = tblSpawnTable.Level or 5
   local intSpawnTime = tblSpawnTable.SpawnTime or 0
   local intRotation = tblSpawnTable.Angle.y or 90
-  
-  local mchNPCTypes = vgui.Create("DMultiChoice")
+
+  local mchNPCTypes = vgui.Create("DComboBox")
   local intID = 1
   for key, npctable in pairs(GAMEMODE.DataBase.NPCs) do
     mchNPCTypes:AddChoice(key)
@@ -145,21 +145,21 @@ function GM.MapEditor.AddSpawnPointControls(pnlAddList)
     strNPCName = data
   end
   pnlAddList:AddItem(mchNPCTypes)
-  
+
   local nmsLevel = GAMEMODE.MapEditor.CreateGenericSlider(pnlAddList, "Level", 50, 0)
   nmsLevel:SetMin(0)
   nmsLevel.ValueChanged = function(self, value) intLevel = value end
   nmsLevel.UpdateSlider(intLevel)
-  
+
   local nmsSpawnTime = GAMEMODE.MapEditor.CreateGenericSlider(pnlAddList, "Spawn Time", 90, 0)
   nmsSpawnTime:SetMin(0)
   nmsSpawnTime.ValueChanged = function(self, value) intSpawnTime = value end
   nmsSpawnTime.UpdateSlider(intSpawnTime)
-  
+
   local nmsRotation = GAMEMODE.MapEditor.CreateGenericSlider(pnlAddList, "Rotation", 180, 0)
   nmsRotation.ValueChanged = function(self, value) intRotation = value end
   nmsRotation.UpdateSlider(intRotation)
-  
+
   local btnUpdateServer = vgui.Create("DButton")
   btnUpdateServer:SetText("Update Server")
   btnUpdateServer.DoClick = function(btnUpdateServer)
@@ -182,15 +182,15 @@ function GM.MapEditor.AddWorldPropControls(pnlAddList)
   local strModel = tblSpawnTable.Entity:GetModel() or "models/props_junk/garbage_metalcan001a.mdl"
   local vecOffset = Vector(0, 0, 0)
   local intRotation = 0
-  
+
   local cpcVectorControls = GAMEMODE.MapEditor.AddVectorControls(pnlAddList)
   cpcVectorControls.ValueChanged = function(vecValue) vecOffset = vecValue end
-  cpcVectorControls.UpdateNewValues(vecOffset)  
-  
+  cpcVectorControls.UpdateNewValues(vecOffset)
+
   local nmsRotation = GAMEMODE.MapEditor.CreateGenericSlider(pnlAddList, "Rotation", 180, 0)
   nmsRotation.ValueChanged = function(self, value) intRotation = value end
   nmsRotation.UpdateSlider(intRotation)
-  
+
   local cpcModelControls = GAMEMODE.MapEditor.AddModelControls(pnlAddList)
   cpcModelControls:SetExpanded(false)
   cpcModelControls.ValueChanged = function(strNewModel) RunConsoleCommand("UD_Dev_EditMap_UpdateWorldProp", intSpawnKey, strNewModel, StringatizeVector(vecOffset), intRotation) end

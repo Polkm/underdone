@@ -29,7 +29,6 @@ function Player:NewGame()
 end
 
 function Player:LoadGame()
-  print("LOADING MY GAME")
   self.Data = {}
   self.Race = "human"
   -- local Data = {}
@@ -42,7 +41,7 @@ function Player:LoadGame()
   -- Load the player's game
   local steamID = string.Replace(self:SteamID(), ":", "!")
   if game.SinglePlayer() or steamID ~= "STEAM_ID_PENDING" then
-    local strFileName = "UnderDone/" .. steamID .. ".txt"
+    local strFileName = "underdone/" .. steamID .. ".txt"
     if file.Exists(strFileName, "DATA") then
       local savedGameData = util.JSONToTable(util.Decompress(file.Read(strFileName)))
       self:SetNWInt("exp", savedGameData.Exp or 0)
@@ -119,7 +118,7 @@ function Player:SaveGame()
   end
   local strSteamID = string.Replace(self:SteamID(), ":", "!")
   if strSteamID ~= "STEAM_ID_PENDING" then
-    local strFileName = "UnderDone/" .. strSteamID .. ".txt"
+    local strFileName = "underdone/" .. strSteamID .. ".txt"
     tblSaveTable.Exp = self:GetNWInt("exp")
     file.Write(strFileName, util.Compress(util.TableToJSON(tblSaveTable)))
   end
