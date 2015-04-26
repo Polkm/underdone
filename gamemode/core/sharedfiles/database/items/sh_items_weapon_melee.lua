@@ -1,23 +1,23 @@
 local function AddModel(tblAddTable, strModel, vecPostion, angAngle, clrColor, strMaterial, vecScale)
-	tblAddTable.Model = tblAddTable.Model or {}
-	if type(tblAddTable.Model) != "table" then tblAddTable.Model = {} end
-	table.insert(tblAddTable.Model, {Model = strModel, Position = vecPostion, Angle = angAngle, Color = clrColor, Material = strMaterial, Scale = vecScale})
-	return tblAddTable
+  tblAddTable.Model = tblAddTable.Model or {}
+  if type(tblAddTable.Model) ~= "table" then tblAddTable.Model = {} end
+  table.insert(tblAddTable.Model, {Model = strModel, Position = vecPostion, Angle = angAngle, Color = clrColor, Material = strMaterial, Scale = vecScale})
+  return tblAddTable
 end
 local function AddStats(tblAddTable, intPower, intFireRate)
-	tblAddTable.Power = intPower
-	tblAddTable.FireRate = intFireRate
-	tblAddTable.HoldType = "melee"
-	tblAddTable.Melee = true
-	return tblAddTable
+  tblAddTable.Power = intPower
+  tblAddTable.FireRate = intFireRate
+  tblAddTable.HoldType = "melee"
+  tblAddTable.Melee = true
+  return tblAddTable
 end
 local function AddBuff(tblAddTable, strBuff, intAmount)
-	tblAddTable.Buffs[strBuff] = intAmount
-	return tblAddTable
+  tblAddTable.Buffs[strBuff] = intAmount
+  return tblAddTable
 end
 local function AddSound(tblAddTable, strShootSound)
-	tblAddTable.Sound = strShootSound
-	return tblAddTable
+  tblAddTable.Sound = strShootSound
+  return tblAddTable
 end
 
 local Item = QuickCreateItemTable(BaseWeapon, "weapon_melee_base", "<name>", "<desc>", "icons/weapon_axe")
@@ -42,15 +42,15 @@ Item = AddStats(Item, 50, 3)
 Item = AddSound(Item, "weapons/iceaxe/iceaxe_swing1.wav")
 Item.Weight = 1
 function Item:SecondaryCallBack(ply)
-	if SERVER then 
-		ply:RestartGesture(ply:Weapon_TranslateActivity(ACT_HL2MP_GESTURE_RANGE_ATTACK))
-	end
-	local Entity = ply:GetEyeTrace().Entity
-	if ValidEntity(Entity) && Entity:IsNPC() then
-		if ply:GetPos():Distance(Entity:GetPos()) < 100 then
-			Entity:SetVelocity(ply:GetForward() * 500 )
-		end
-	end
+  if SERVER then 
+    ply:RestartGesture(ply:Weapon_TranslateActivity(ACT_HL2MP_GESTURE_RANGE_ATTACK))
+  end
+  local Entity = ply:GetEyeTrace().Entity
+  if IsValid(Entity) and Entity:IsNPC() then
+    if ply:GetPos():Distance(Entity:GetPos()) < 100 then
+      Entity:SetVelocity(ply:GetForward() * 500 )
+    end
+  end
 end
 Register.Item(Item)
 

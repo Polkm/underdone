@@ -12,18 +12,18 @@ end
    Desc: Called when a keyvalue is added to us
 ---------------------------------------------------------*/
 function ENT:KeyValue(Key, Value)
-	if Key == "pvp" then
-		self.pvp = false
-		if Value == "true" then
-			self.pvp = true
-		end
-		if Value == "false" then
-			self.pvp = false
-		end
-	end
-	if Key == "areasound" then
-		self.Areasound = Value
-	end
+  if Key == "pvp" then
+    self.pvp = false
+    if Value == "true" then
+      self.pvp = true
+    end
+    if Value == "false" then
+      self.pvp = false
+    end
+  end
+  if Key == "areasound" then
+    self.Areasound = Value
+  end
 end
 
 
@@ -31,33 +31,33 @@ end
    Name: StartTouch
 ---------------------------------------------------------*/
 function ENT:StartTouch(Ent)
-	if (ValidEntity(Ent)) and (Ent:IsPlayer()) then
-		if self.Areasound then
-			Ent:SendLua("RunConsoleCommand('stopsounds')")
-			timer.Simple(0.1, function()
-				Ent:ConCommand("UD_PlaySound " .. self.Areasound)
-			end)
-		end
-	end
+  if (IsValid(Ent)) and (Ent:IsPlayer()) then
+    if self.Areasound then
+      Ent:SendLua("RunConsoleCommand('stopsounds')")
+      timer.Simple(0.1, function()
+        Ent:ConCommand("UD_PlaySound " .. self.Areasound)
+      end)
+    end
+  end
 end
 
 /*---------------------------------------------------------
    Name: EndTouch
 ---------------------------------------------------------*/
 function ENT:EndTouch(Ent)
-	if (ValidEntity(Ent)) and (Ent:IsPlayer()) then
-		Ent.Pvp = false
-		Ent:SendLua("RunConsoleCommand('stopsounds')")
-	end
+  if (IsValid(Ent)) and (Ent:IsPlayer()) then
+    Ent.Pvp = false
+    Ent:SendLua("RunConsoleCommand('stopsounds')")
+  end
 end
 
 /*---------------------------------------------------------
    Name: Touch
 ---------------------------------------------------------*/
 function ENT:Touch(Ent)
-	if (ValidEntity(Ent)) and (Ent:IsPlayer()) then
-		Ent.Pvp = self.pvp or false
-	end
+  if (IsValid(Ent)) and (Ent:IsPlayer()) then
+    Ent.Pvp = self.pvp or false
+  end
 end
 
 /*---------------------------------------------------------
@@ -65,7 +65,7 @@ end
    Desc: Return true if this object should trigger us
 ---------------------------------------------------------*/
 function ENT:PassesTriggerFilters(Ent)
-	return true
+  return true
 end
 
 /*---------------------------------------------------------

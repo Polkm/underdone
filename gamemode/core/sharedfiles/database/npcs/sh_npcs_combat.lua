@@ -1,28 +1,28 @@
 local function QuickNPC(strName, strPrintName, strSpawnName, strRace, intDistance, strModel)
-	local NPC = {}
-	NPC.Name = strName
-	NPC.PrintName = strPrintName
-	NPC.SpawnName = strSpawnName
-	NPC.Race = strRace
-	NPC.DistanceRetreat = intDistance
-	NPC.Model = strModel
-	return NPC
+  local NPC = {}
+  NPC.Name = strName
+  NPC.PrintName = strPrintName
+  NPC.SpawnName = strSpawnName
+  NPC.Race = strRace
+  NPC.DistanceRetreat = intDistance
+  NPC.Model = strModel
+  return NPC
 end
 local function AddBool(Table, strFrozen, strInvincible, strIdle)
-		Table.Frozen = strFrozen
-		Table.Invincible = strInvincible
-		Table.Idle = strIdle
-	return Table
+    Table.Frozen = strFrozen
+    Table.Invincible = strInvincible
+    Table.Idle = strIdle
+  return Table
 end
 local function AddMultiplier(Table, strHealth, strDamage)
-	Table.HealthPerLevel = strHealth
-	Table.DamagePerLevel = strDamage
-	return Table
+  Table.HealthPerLevel = strHealth
+  Table.DamagePerLevel = strDamage
+  return Table
 end
 local function AddDrop(Table, strName, intChance, intMin, intMax, intMinLevel)
-	Table.Drops = Table.Drops or {}
-	Table.Drops[strName] = {Chance = intChance, Min = intMin, Max = intMax, MinLevel = intMinLevel}
-	return Table
+  Table.Drops = Table.Drops or {}
+  Table.Drops[strName] = {Chance = intChance, Min = intMin, Max = intMax, MinLevel = intMinLevel}
+  return Table
 end
 
 local NPC = QuickNPC("zombie", "Zombie", "npc_zombie", "zombie", 1000)
@@ -62,13 +62,13 @@ AddDrop(NPC, "quest_zombieblood", 75)
 AddMultiplier(NPC, 11, 3)
 NPC.DeathDistance = 14
 NPC.Resistance = "Fire"
-NPC.Color = {200,0,0,255} 
+NPC.Color = {200,0,0,255}
 function NPC:DamageCallBack(npc, victim)
-	local intChance = 8 
-	local intTime = 7
-	if  math.random(1, 100 / intChance) == 1 then
-		victim:IgniteFor(intTime, 1, victim)
-	end
+  local intChance = 8
+  local intTime = 7
+  if  math.random(1, 100 / intChance) == 1 then
+    victim:IgniteFor(intTime, 1, victim)
+  end
 end
 Register.NPC(NPC)
 
@@ -81,17 +81,17 @@ AddDrop(NPC, "item_rifleammo_small", 17)
 AddDrop(NPC, "item_buckshotammo_small", 15)
 AddDrop(NPC, "armor_helm_headcrab", 0.2, nil, nil, 5)
 AddDrop(NPC, "quest_zombieblood", 75)
-AddDrop(NPC, "armor_helm_snowman", 2
-AddDrop(NPC, "quest_moneystack", 10
+AddDrop(NPC, "armor_helm_snowman", 2)
+AddDrop(NPC, "quest_moneystack", 10)
 AddMultiplier(NPC, 11, 3)
 NPC.DeathDistance = 14
 NPC.Resistance = "Ice"
-NPC.Color = {0,0,200,255} 
+NPC.Color = {0,0,200,255}
 function NPC:DamageCallBack(npc, victim)
-	intChance = 8
-	if  math.random(1, 100 / intChance) == 1 then
-		victim:SlowDown(7)
-	end
+  intChance = 8
+  if  math.random(1, 100 / intChance) == 1 then
+    victim:SlowDown(7)
+  end
 end
 Register.NPC(NPC)
 
@@ -109,7 +109,7 @@ AddDrop(NPC, "quest_zombieblood", 75)
 AddDrop(NPC, "item_cardboard", 40)
 AddDrop(NPC, "item_bagofnoodles", 15)
 AddDrop(NPC, "book_cooknoodles", 5)
-AddDrop(NPC, "armor_helm_pot", 2
+AddDrop(NPC, "armor_helm_pot", 2)
 AddMultiplier(NPC, 8, 4)
 NPC.DeathDistance = 14
 Register.NPC(NPC)
@@ -126,7 +126,7 @@ AddDrop(NPC, "weapon_melee_skele", 0.01, nil, nil, 50)
 AddDrop(NPC, "item_cardboard", 50)
 AddDrop(NPC, "item_bagofnoodles", 25)
 AddDrop(NPC, "book_cooknoodles", 10)
-AddDrop(NPC, "armor_helm_pot", 5
+AddDrop(NPC, "armor_helm_pot", 5)
 AddMultiplier(NPC, 25, 4)
 NPC.DeathDistance = 14
 Register.NPC(NPC)
@@ -252,15 +252,15 @@ NPC = AddDrop(NPC, "armor_helm_tyrant", 1, nil, nil, 40)
 NPC = AddDrop(NPC, "armor_belt_tyrant", 1, nil, nil, 40)
 NPC = AddDrop(NPC, "armor_shoulder_tyrant", 1, nil, nil, 40)
 NPC = AddDrop(NPC, "weapon_melee_tyrant", 1, nil, nil, 40)
-AddMultiplier(NPC, 50, 6) --health and damage is multiplied by integers inputed into those slots. 
+AddMultiplier(NPC, 50, 6) --health and damage is multiplied by integers inputed into those slots.
 NPC.Weapon = "weapon_pistol"
 NPC.DeathDistance = 14 --Do not edit.
 NPC.Resistance = "Ice"
 function NPC:DamageCallBack(npc, victim)
-	intChance = 50
-	if  math.random(1, 100 / intChance) == 1 then
-		victim:SlowDown(3)
-	end
+  intChance = 50
+  if  math.random(1, 100 / intChance) == 1 then
+    victim:SlowDown(3)
+  end
 end
 Register.NPC(NPC)
 

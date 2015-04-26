@@ -16,9 +16,6 @@ Event.Name = "event_antlion_spawning"
 Event.PrintName = "Antlion Mating Season"
 Event.Duration = "10"
 Event.NPCAttack = {}
-Event.NPCAttack[1] = {Class = "antlion" ,Amount = 20, Spawntime = 20, Spawnpos = Vector(-3918, -884, 881)
-Event.NPCAttack[2] = {Class = "antlion" ,Amount = 20, Spawntime = 20, Spawnpos = Vector(-4396, -1007, 882)
-Event.Time = { w = "3", H = "14", Start = "15"} 
-
-
-
+Event.NPCAttack[1] = {Class = "antlion" ,Amount = 20, Spawntime = 20, Spawnpos = Vector(-3918, -884, 881)}
+Event.NPCAttack[2] = {Class = "antlion" ,Amount = 20, Spawntime = 20, Spawnpos = Vector(-4396, -1007, 882)}
+Event.Time = { w = "3", H = "14", Start = "15"}

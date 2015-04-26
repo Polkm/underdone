@@ -1,5 +1,19 @@
--------------------------
-----------Colors---------
+GM.Name     = "underdone"
+GM.Author     = "Polkm"
+GM.Email     = "polkmpolkmpolkm@gmail.com"
+GM.Website     = "@Polkm1"
+GM.MaxSlots    = 20
+
+GM.MonsterViewDistance = 200
+GM.RelationHate = 1
+GM.RelationFear = 2
+GM.RelationLike = 3
+GM.RelationNeutral = 4
+GM.AuctionsPerPage = 20
+
+Register = {}
+GM.DataBase = {}
+
 clrGray = Color(97, 95, 90, 255)
 clrDrakGray = Color(43, 42, 39, 255)
 clrGreen = Color(194, 255, 72, 255)
@@ -11,22 +25,6 @@ clrTan = Color(178, 161, 126, 255)
 clrCream = Color(245, 255, 154, 255)
 clrMooca = Color(107, 97, 78, 255)
 clrWhite = Color(242, 242, 242, 255)
----------Generic---------
-GM.Name 		= "UnderDone"
-GM.Author 		= "Shell Shocked Gaming & TowerYard Entertainment"
-GM.Email 		= "polkmpolkmpolkm@gmail.com"
-GM.Website 		= "http://shellshocked.net46.net/"
-GM.MaxSlots		= 20
------Global Vars---------
-GM.MonsterViewDistance = 200
-GM.RelationHate = 1
-GM.RelationFear = 2
-GM.RelationLike = 3
-GM.RelationNeutral = 4
-GM.AuctionsPerPage = 20
---------DataBase---------
-Register = {}
-GM.DataBase = {}
 
 GM.DataBase.Items = {}
 function Register.Item(tblItem) GM.DataBase.Items[tblItem.Name] = tblItem end
@@ -43,9 +41,9 @@ function EquipmentSetTable(strEquipmentSet) return GAMEMODE.DataBase.EquipmentSe
 GM.DataBase.Stats = {}
 local intStatIndex = 1
 function Register.Stat(tblItem)
-	GM.DataBase.Stats[tblItem.Name] = tblItem
-	GM.DataBase.Stats[tblItem.Name].Index = intStatIndex
-	intStatIndex = intStatIndex + 1
+  GM.DataBase.Stats[tblItem.Name] = tblItem
+  GM.DataBase.Stats[tblItem.Name].Index = intStatIndex
+  intStatIndex = intStatIndex + 1
 end
 function StatTable(strStat) return GAMEMODE.DataBase.Stats[strStat] end
 
@@ -78,12 +76,12 @@ function Register.Event(tblEvent) GM.DataBase.Events[tblEvent.Name] = tblEvent e
 function EventTable(strEvent) return GAMEMODE.DataBase.Events[strEvent] end
 
 function AddPlayerModel(strModel)
-	table.insert(GM.PlayerModel, {strModel})
+  table.insert(GM.PlayerModel, {strModel})
 end
 
 GM.PlayerModel = {}
 ---------Models----------
-//Citizen
+-- Citizen
 AddPlayerModel( "models/player/group01/male_01.mdl" )
 AddPlayerModel( "models/player/group01/male_02.mdl" )
 AddPlayerModel( "models/player/group01/male_03.mdl" )
@@ -100,7 +98,7 @@ AddPlayerModel( "models/player/group01/female_04.mdl" )
 AddPlayerModel( "models/player/group01/female_06.mdl" )
 AddPlayerModel( "models/player/group01/female_07.mdl" )
 
-//Rebel
+-- Rebel
 AddPlayerModel( "models/player/group03/male_01.mdl" )
 AddPlayerModel( "models/player/group03/male_02.mdl" )
 AddPlayerModel( "models/player/group03/male_03.mdl" )

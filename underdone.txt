@@ -1,12 +1,12 @@
 "underdone"
 {
-	"base"		"base"
-	"title"		"underdone"
-	"maps"		""
-	"menusystem"	"1"
+  "base"    "base"
+  "title"    "underdone"
+  "maps"    ""
+  "menusystem"  "1"
 
-	"settings"
-	{
-	}
+  "settings"
+  {
+  }
 
 }
