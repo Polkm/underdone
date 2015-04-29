@@ -37,7 +37,7 @@ function GM:TimeChecker()
       end
     end
     if os.date("%w") == Event.Time.w and os.date("%H") == Event.Time.H and os.date("%M") < Event.Duration then
-      if GAMEMODE.EventHasStarted then return end
+      if GAMEMODE.EventHasStarted or table.Count(player.GetAll()) >= (Event.MinPlayers or 1) then return end
       GAMEMODE.EventHasStarted = true
       GAMEMODE:NotificateAll("Event " ..Event.PrintName.. " Has Begun!")
       GAMEMODE:StartEvent(Event.Name)
