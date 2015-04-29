@@ -43,7 +43,7 @@ function Player:LoadGame()
   if game.SinglePlayer() or steamID ~= "STEAM_ID_PENDING" then
     local strFileName = "underdone/" .. steamID .. ".txt"
     if file.Exists(strFileName, "DATA") then
-      local savedGameData = util.JSONToTable(util.Decompress(file.Read(strFileName)))
+      local savedGameData = util.JSONToTable(util.Decompress(file.Read(strFileName)) or "")
       self:SetNWInt("exp", savedGameData.Exp or 0)
       self:SetNWInt("SkillPoints", self:GetDeservedSkillPoints())
       if savedGameData.Skills then
